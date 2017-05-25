@@ -6,6 +6,7 @@
 \usepackage{booktabs}
 \usepackage[scale=2]{ccicons}
 %----------------------------
+\newcommand\alertitem[1]{\alert<+>{\item {#1}}}
 \usepackage[lined,ruled,vlined,commentsnumbered]{algorithm2e}
 \newcommand*{\MG}{\VarCal{M}}  
 %To draw pictures
@@ -66,11 +67,11 @@
 \usepackage{xspace}
 \newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
 
-\title{Metropolis}
-\subtitle{A modern beamer theme}
+\title{From Scenarios To Optimally Allocated Timed Automata}
+%\subtitle{A modern beamer theme}
 \date{\today}
-\author{Matthias Vogelgesang}
-\institute{Center for modern beamer themes}
+\author{Sandeep Vuppula}
+\institute{University of Minnesota Duluth}
 % \titlegraphic{\hfill\includegraphics[height=1.5cm]{logo.pdf}}
 
 \begin{document}
@@ -82,9 +83,126 @@
   \tableofcontents[hideallsubsections]
 \end{frame}
 
+\begin{frame}{Objectives Of The Research}
+	Our main focus of the research is,
+	\begin{enumerate}
+		\item	To synthesize a timed automaton from a set of scenarios.
+		\item	To optimally allocate clocks in the constructed timed automaton.
+	\end{enumerate}
+\end{frame}
+
 \section{Introduction}
 
+\begin{frame}{Introduction}
+	\begin{itemize}
+		\item Model-based design is a very effective method for designing real-time systems.
+		\item Building formal models for systems is challenging because of the lack of good formal requirements specifications.
+		\item In many real-time systems where safety is critical.
+		\item Modeling a system formally can help us to understand the desired and undesired behaviours of the system.
+	\end{itemize}	
+\end{frame}
+
+\begin{frame}{Introduction}
+	\begin{itemize}
+		\item	{To construct a formal model, the following questions are to be answered first:
+					\begin{enumerate}
+						\item How the requirements should be expressed formally, and
+						\item How the formal model of a real-time system can be constructed from requirements.
+					\end{enumerate}
+				}
+			\pause
+		\item {The formal model that we build is \alert{timed automata} \cite{Alur:1994:TTA:180782.180519}.}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Introduction}
+%	Synthesizing timed automaton
+	\begin{itemize}
+		\item We use scenarios to build a formal model. A scenario is a partial description of the behaviour of a system.
+		\item We introduce Timed Event Sequences (TES) to formally represent the scenarios formaly.
+		\item We use mode graphs to specify the legal events that can in the system.
+	\end{itemize}
+	\pause
+	\alert{We synthesize a \emph{minimal}, \emph{acyclic} and \emph{deterministic} timed automaton using TES and mode graph.}
+\end{frame}
+
+\begin{frame}{Introduction}
+	Our timed automaton belongs to a class of timed automata that satisfies the following properties:
+	\begin{itemize} 
+		\item A clock $t_{j}$ can be reset only on the transitions emanating from a state labelled $j$ and,
+		\item A clock in a clock constraint on a transition $r$ from a state $q$ can only refer to a clock that has been reset on a transition leaving a state that dominates $q$. We call this \emph{dominance assumption}.
+	\end{itemize}
+%	\pause
+%	\vspace{0.5cm}
+%	Given a timed automaton that belongs to our class, we use \emph{liveness analysis} of clocks to optimally allocate clocks.
+\end{frame}
+
+\begin{frame}{Introduction}
+	\begin{itemize}
+		\item Given a timed automaton $\cal A$, the problem of deciding whether there exists another timed automaton $\cal B$ that accepts the same language as that of $\cal A$ but with fewer number of clocks is undecidable.
+		\item Moreover, the number of clocks in a given timed automaton has a direct impact on verification of the system.
+	\end{itemize}
+	\vspace{0.5cm}
+	
+	\pause
+	\alert{	Given a timed automaton that belongs to our class, we use \emph{liveness analysis} of clocks to optimally allocate clocks.}
+\end{frame}
+
 \section{Background}
+
+\begin{frame}{Real-time systems}
+	\begin{itemize}
+		\item A real-time system takes input from its surrounding environment and produces results within a stipulated amount of time.
+		\item In the real world, the behaviour of almost every system changes according to time.
+		\item We can model such real time systems with the help of timed automata.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Modeling Time}
+	There are three approaches for modeling time \cite{Alur:1994:TTA:180782.180519}.
+		\begin{itemize}		
+		\item \underline{Discrete time model}: Time is considered as discrete and monotonically increasing sequence of integers. Limits the preciseness: in real-time systems, the events do not occur at integer times.
+		\pause
+		\item \underline{Fictitious-clock model}: It is similar to that of discrete time model except that it assumes sequence of times to be non decreasing integers. Limits accuracy, as the exact time values at which the events occur are not considered. 
+		\pause
+		\item \underline{Dense time model}: In this model, the domain of time is considered as a dense set and the time of occurrences of events as real numbers, which increase monotonically without any limit. Difficulty in transforming dense time traces into formal languages.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Finite State Automata}
+A finite state automaton (FSA) or a finite state machine (FSM) is an abstract machine which has a finite number of states. On an input, the machine changes from one state to another state: this is called a transition. %A FSA has a set of states, inputs, transitions, intial states and final states. 
+
+\begin{figure}
+	\begin{adjustbox}{max totalsize={.99\textwidth}{.8\textheight},center}
+		
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=4cm,
+		semithick]
+		\tikzstyle{every state}=[draw,minimum size=1em]
+		
+		\node[state]       (S1)                       {Initial};
+		\node[state]       (S2)    [right of=S1]      {t_{found}};
+		\node[state]       (S3)    [right of=S2]      {i_{found}};
+		\node[state]       (S4)    [right of=S3]      {m_{found}};
+		\node[state]       (S5)    [right of=S4]      {success};
+		\node[state]       (S6)    [below of=S3]      {error};
+		
+		
+		\path 	(S1)   edge          		node[anchor=south, above] {t}     (S2)
+				(S2)   edge                 node[anchor=south, above] {i}	  (S3)
+				(S3)   edge                 node[anchor=south, above] {m} 	  (S4)
+				(S4)   edge   				node[anchor=south, above] {e}     (S5)   
+				(S1)   edge          		node[anchor=south, above] {not\_t}     (S2)
+				(S2)   edge                 node[anchor=south, above] {not\_i}	  (S3)
+				(S3)   edge                 node[anchor=south, above] {not\_m} 	  (S4)
+				(S4)   edge   				node[anchor=south, above] {not\_e}     (S5)   
+		;
+		\end{tikzpicture}
+		\end{adjustbox}
+		\caption{Simple finite state automaton}
+		\label{fig:FSA}		
+	\end{figure}
+
+\end{frame}
 
 \begin{frame}{Timed Automata}
 	\begin{itemize}
@@ -804,7 +922,7 @@ Explain extended scenario
 		(Red)       edge                 node[anchor=south, above] {turn-yellow}
 		node[anchor=north, below] {$c_0\ge5,c_0:=0$}     (Yellow)
 		(Yellow)    edge                 node[anchor=south, above] {turn-green} 
-		node[anchor=north, below] {$c_1\ge1,c_0:=0$}     (Green)
+		node[anchor=north, below] {$c_0\ge1,c_0:=0$}     (Green)
 		(Green)     edge   [bend left]   node[anchor=south, above] {reset} 
 		node[anchor=north, below] {$c_0\ge5$}           (Initial)   
 		;
@@ -894,6 +1012,10 @@ Explain extended scenario
 	\cite{OptimalClockAllocationTA}
 \end{frame}
 
+\begin{frame}[standout]
+THANK PROFESSORS???
+Neda and Committee mem??
+\end{frame}
 \begin{frame}[standout]
 	Questions?
 \end{frame}
