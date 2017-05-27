@@ -8,6 +8,7 @@
 %----------------------------
 \newcommand\alertitem[1]{\alert<+>{\item {#1}}}
 \usepackage[lined,ruled,vlined,commentsnumbered]{algorithm2e}
+
 \newcommand*{\MG}{\VarCal{M}}  
 %To draw pictures
 \usepackage{pgf}
@@ -83,10 +84,10 @@
   \tableofcontents[hideallsubsections]
 \end{frame}
 
-\begin{frame}{Objectives Of The Research}
+\begin{frame}{Objectives of the Research}
 	Our main focus of the research is,
 	\begin{enumerate}
-		\item	To synthesize a timed automaton from a set of scenarios.
+		\item	To synthesize a timed automaton from a set of scenarios, and
 		\item	To optimally allocate clocks in the constructed timed automaton.
 	\end{enumerate}
 \end{frame}
@@ -110,7 +111,7 @@
 						\item How the formal model of a real-time system can be constructed from requirements.
 					\end{enumerate}
 				}
-			\pause
+			%\pause
 		\item {The formal model that we build is \alert{timed automata} \cite{Alur:1994:TTA:180782.180519}.}
 \end{itemize}
 \end{frame}
@@ -122,7 +123,7 @@
 		\item We introduce Timed Event Sequences (TES) to formally represent the scenarios formally.
 		\item We use mode graphs to specify the legal events that can occur in the system.
 	\end{itemize}
-	\pause
+	%\pause
 	\alert{We synthesize a \emph{minimal}, \emph{acyclic} and \emph{deterministic} timed automaton using TES and mode graph.}
 \end{frame}
 
@@ -144,7 +145,7 @@
 	\end{itemize}
 	\vspace{0.5cm}
 	
-	\pause
+	%\pause
 	\alert{	Given a timed automaton that belongs to our class, we use \emph{liveness analysis} of clocks to optimally allocate clocks.}
 \end{frame}
 
@@ -162,9 +163,9 @@
 	There are three approaches for modeling time \cite{Alur:1994:TTA:180782.180519}.
 		\begin{itemize}		
 		\item \underline{Discrete time model}: Time is considered as discrete and monotonically increasing sequence of integers. Limits the preciseness: in real-time systems, the events do not occur at integer times.
-		\pause
+		%\pause
 		\item \underline{Fictitious-clock model}: It is similar to that of discrete time model except that it assumes sequence of times to be non decreasing integers. Limits accuracy, as the exact time values at which the events occur are not considered. 
-		\pause
+		%\pause
 		\item \underline{Dense time model}: In this model, the domain of time is considered as a dense set and the time of occurrences of events as real numbers, which increase monotonically without any limit. Difficulty in transforming dense time traces into formal languages.
 	\end{itemize}
 \end{frame}
@@ -207,7 +208,7 @@ A finite state automaton (FSA) or a finite state machine (FSM) is an abstract ma
 		\item A timed automaton \cite{Alur:1994:TTA:180782.180519} is a finite state automaton extended with a finite set of real-valued clocks. 
 		\item Upon an input, the selection of next state is based not only on the input symbol but also on the time of the current symbol with respect to the formerly read symbols. 
 	\end{itemize}
-	
+	%\pause
 	\textbf{Example:} Consider a simple timed automaton in Figure \ref{fig:fig1}. This automaton accepts an input sequence `a' followed by `b' such that, there is 2 units of time difference between any two consecutive a's and b's.
 	 
 	 \begin{figure}
@@ -237,8 +238,9 @@ Our method of synthesizing a timed automaton model of a real-time system from sc
 				\item Set of scenarios together can capture the behaviour of the real-time system.
 			\end{itemize}
 			}
+		%\pause
 		\item We use Timed Event Sequences to describe the scenarios formally.
-		\item We use Mode graphs to specify the legal events that can occur in the system.
+		\item We use \emph{mode graphs} to specify the legal events that can occur in the system.
 	\end{itemize}	
 \end{frame}
 
@@ -411,13 +413,14 @@ It is a tuple $\mathcal{M} = (M, m_0, m_f, \Sigma, T)$ where,
 \end{frame}
 
 \begin{frame}{Constructing a Time Annotated Graph from Scenarios}
-Given a mode graph $\mathcal{M}$ and a set of Timed Event Sequences  $\Xi = \{\xi_1,\xi_2,..,\xi_k\}$ as inputs, our algorithm synthesizes a time annotated graph (TAG) G \cite{FromScenariosToTimedAutomata-2016}. Initially we start with an empty graph, $G_0$ and perform the following steps:
-\begin{enumerate}
-	\item Build a partial graph $G_1$ using the first scenario $\xi_1$,
-	\item The algorithm repeatedly takes a partially built graph $G_k$, and a scenario $\xi_{k+1} ~(1 < k < n)$ and then generates a new partial graph $G_{k+1}$
-\end{enumerate}
-Decision on whether to create new states and transitions is resolved with the help of state labels (modes).
-A new state $s$ is created and labelled with a mode $m_j$ if there is an event $e$ from state $q$ such that $L(q) = m_i$ and $(m_i,e,m_j) \in T$.
+	Given a mode graph $\mathcal{M}$ and a set of Timed Event Sequences  $\Xi = \{\xi_1,\xi_2,..,\xi_k\}$ as inputs, our algorithm synthesizes a time annotated graph (TAG) G \cite{FromScenariosToTimedAutomata-2016}. Initially we start with an empty graph, $G_0$ and perform the following steps:
+	\begin{enumerate}
+		\item Build a partial graph $G_1$ using the first scenario $\xi_1$,
+		\item The algorithm repeatedly takes a partially built graph $G_k$, and a scenario $\xi_{k+1} ~(1 < k < n)$ and then generates a new partial graph $G_{k+1}$
+	\end{enumerate}
+	%\pause
+	Decision on whether to create new states and transitions is resolved with the help of state labels (modes).
+	A new state $s$ is created and labelled with a mode $m_j$ if there is an event $e$ from state $q$ such that $L(q) = m_i$ and $(m_i,e,m_j) \in T$.
 \end{frame}
 
 \begin{frame}{Properties of Constructed Time Annotated Graph}
@@ -425,14 +428,19 @@ The graph constructed by algorithm has the following properties:
 	\begin{enumerate}
 		\item
 		It is acyclic,%: as we do not introduce a transition from a state to it's previous states.
+		%\pause
 		\item
 		The graph is connected,%, because the input set of TES is complete.
+		%\pause
 		\item\label{p3}
 		By construction, two states have the same label only if one is a predecessor of the other, %We create a new state with the same label only to avoid introducing a transition from a state to it's predecessor.
+		%\pause
 		\item\label{p4} The graph is finite,
 %		There must be at least one state with no outgoing transitions, because the graph is finite.
+		%\pause
 		\item
 		The graph is deterministic,%: we only add a new transition only if it does not exist from state $s$.
+		%\pause
 		\item
 		The graph is minimal, %because:
 %		\begin{itemize}
@@ -441,8 +449,10 @@ The graph constructed by algorithm has the following properties:
 %			\item
 %			In case of multiple existing states, we choose the state that was created first.
 %		\end{itemize}
+		%\pause
 		\item
 		After construction, every scenario is a partial run of the constructed graph, and
+		%\pause
 		\item
 		Every path in the final graph is identical to that of the mode graph. %because our algorithm adds a new state or transition based on the mode and transition information in the mode graph.
 	\end{enumerate}
@@ -596,8 +606,11 @@ The graph constructed by algorithm has the following properties:
 The timed automaton constructed as a result of our synthesis method belongs to the class of timed automata that satisfies these properties:
 	\begin{enumerate}
 		\item{The automaton is connected and has a unique initial state $s_0$,}%Every state is reachable from $s_0$},
+		%\pause
 		\item{A clock constraint on a transition `$r$' can only refer to the times of transitions from states that dominate the transition `$r$', we call this \textit{dominance assumption}},
+		%\pause
 		\item{A clock $t_j$ can only be reset on a transition leaving a state $s$, where label is $j$, that is $L(s)=j$.}
+		%\pause
 	\end{enumerate}
 \end{frame}
 
@@ -610,6 +623,7 @@ Given a timed automaton $\cal A$ that belongs to the aforementioned class of tim
 	%\item{Replace the original clocks in $A ~(V=\left\{t_0,t_1,...,t_n \right\}$) with a set of new clocks $P=\left \{c_0,c_1,..,c_m \right\}$ such that $|P|\le|V|$}
 	\item{Rewrite the clock constraints and clock resets in $\cal A$ in terms of new clock variables.}
 \end{enumerate}
+The complexity of our optimal clock allocation algorithm is quadratic in the size of the original graph.
 %\begin{itemize}
 %	\item Liveness analysis
 %	\item Clock allocation
@@ -617,7 +631,7 @@ Given a timed automaton $\cal A$ that belongs to the aforementioned class of tim
 \end{frame}
 
 \begin{frame}{Liveness Range Analysis}
-Liveness Ranges of all the clocks in a timed automaton helps us determine if a particular clock is only on these transitions.
+Liveness Ranges of all the clocks in a timed automaton helps us determine if a particular clock is needed on these transitions.
 \begin{itemize}
 	\item Let $\cal A$ $= (E, Q, \{q^0\}, Q_f, V, R, L)$ be the timed automaton and $r = (s, s', e, \lambda_r, \phi_r) \in R$ be a transition.
 	\item Let $N = \{j~|~t_j\sim a \in \phi \vee t_j \in \lambda$, where $(s, s', e, \lambda_r, \phi_r) \in R\}$, be a set of \emph{clock numbers} used to denote subscripts of the clocks on all the transitions in $R$.
@@ -629,13 +643,13 @@ Liveness Ranges of all the clocks in a timed automaton helps us determine if a p
 	\begin{itemize}
 		\item
 		$\mathit{\textbf{clock\_ref}}$: $\mathit{clock\_ref(r)}$ is the set of clocks which are referred to in the clock constraints on $r$.
-		
+		%\pause
 		\item
 		$\textbf{born}$: $\Born(r)$ identifies a clock that is reset on $r$  whose value can be used on some transition	reachable from $r$.
-	
+		%\pause
 		\item 
 		$\textbf{active}$: $\Active(r)$ identifies clocks that are ``alive'' on $r$ (i.e., their  values may be subsequently used). Notice that $\Born(r)\subseteq \Active(r)$.
-		
+		%\pause
 		\item
 		$\textbf{needed}$: Maps transition $r$ to $\Active(r)\cup \mathit{clock\_ref(r)}$.
 		
@@ -707,50 +721,55 @@ Liveness Ranges of all the clocks in a timed automaton helps us determine if a p
 \end{frame}
 
 \begin{frame}{Clock Allocation}
-	\begin{definition}
-		Given a timed automaton $\cal A$ with the set $R$ of (extended) transitions and the set $N$ of clock numbers, a \emph{clock allocation} for $\cal A$ is a relation $\Var{alloc}\subset R\times P_0\times N$ such that $(r, c, j)\in \Var{alloc} \Rightarrow j\in \Var{active(r)}$.
-	\end{definition}
+%	\begin{definition}	
+	\textbf{Definition:} Given a timed automaton $\cal A$ with the set $R$ of (extended) transitions and the set $N$ of clock numbers, a \emph{clock allocation} for $\cal A$ is a relation $\Var{alloc}\subset R\times P_0\times N$ such that $(r, c, j)\in \Var{alloc} \Rightarrow j\in \Var{active(r)}$. Where, $P_0$ is the pool of new clock variables.
+%	\end{definition}
+	%\pause
 	\begin{columns}
-		\begin{column}{0.4\textwidth}
-			\begin{figure}
-				\begin{adjustbox}{max totalsize={.80\textwidth}{.55\textheight},center}
-				\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.5cm,
-				semithick]
-				\tikzstyle{every state}=[draw,minimum size=1em]
-				
-				\node[state]         (S_0)                    {$S_0$};
-				\node[state]         (S_1) [below of=S_0]     {$S_1$};
-				\node[state]         (S_2) [below of=S_1]     {$S_2$};
-				\node[state]         (S_3) [below of=S_2]     {$S_3$};
-				\node[state]         (S_4) [below of=S_3]     {$S_4$};
-				\node[state]         (S_5) [below of=S_4]     {$S_5$};
-				\node[state]         (S_6) [below of=S_5]     {$S_6$};	
-				
-				\path (S_0) edge              node[right]  {r0, [$t_0:=0$]}  (S_1)
-				(S_1) edge              node[right]  {r1, [$t_0<2$]}   (S_2)
-				(S_2) edge              node[right]  {r2, [$t_2:=0$]}  (S_3)
-				(S_3) edge              node[right] {r3, [$t_2<2$]}   (S_4)
-				(S_4) edge              node[right] {r4, [$t_4:=0$]}  (S_5)
-				(S_5) edge              node[right] {r5, [$t_4<2$]}   (S_6)
-				
-				;
-				\end{tikzpicture}
+		\begin{column}{0.5\textwidth}
+			\begin{figure}[!h]
+				\begin{adjustbox}{max totalsize={.99\textwidth}{.5\textheight},center}
+					\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2cm,
+					semithick]
+					\tikzstyle{every state}=[draw,minimum size=1em]
+					
+					\node[state]         (S_0)                    {$S_0$};
+					\node[state]         (S_1) [below of=S_0]     {$S_1$};
+					\node[state]         (S_2) [below left of=S_1]     {$S_2$};
+					\node[state]         (S_3) [below right of=S_1]     {$S_3$};
+					\node[state]         (S_4) [below of=S_2]   {$S_4$};
+					\node[state]         (S_5) [below  of=S_3]    {$S_5$};
+					\node[state]         (S_6) [below left of=S_5]     {$S_6$};
+					\node[state]         (S_7) [below of=S_6]     {$S_7$};
+					
+					
+					
+					\path (S_0) edge              node[left]  {r0 [$t_0 := 0$]}  (S_1)
+					(S_1) edge              node[left]  {r1 [$t_1 := 0$]}  (S_2)
+					(S_1) edge              node[right] {r2 [$t_1 := 0$]}  (S_3)
+					(S_2) edge              node[left]  {r3 [$t_1\ge2$]}  (S_4)
+					(S_3) edge              node[right] {r4 [$t_1\ge2$]}  (S_5)
+					(S_4) edge              node[left]  {r5}  (S_6)
+					(S_5) edge              node[right] {r6}  (S_6)
+					(S_6) edge              node[right] {r7 [$t_0\ge5$]}  (S_7)
+					
+					
+					;
+					\end{tikzpicture}
 				\end{adjustbox}
-				\caption{A simple timed automaton}
-		
+				\caption{A timed automaton satisfying the dominance assumption}
+				\label{fig:SimpleTimedAutomaton2}
 			\end{figure}
 		\end{column}
 		\begin{column}{0.5\textwidth}
 			$\Var{alloc}~$=$\{(r_0,c_0,0), (r_1,c_0,0), (r_2,c_0,0), $\\ $(r_3,c_0,0),(r_4,c_0,0), (r_5,c_0,0), (r_6,c_0,0), $\\$(r_1,c_1,1),(r_2,c_1,1), (r_3,c_1,1), (r_4,c_1,1)\} $
 		\end{column}
-		\begin{column}{0.1\textwidth}
-			
-		\end{column}
+		
 	\end{columns}
 
 \end{frame}
 
-\begin{frame}{Problematic states}
+\begin{frame}{Problematic States}
 
 	\begin{figure}
 		\begin{adjustbox}{max totalsize={.90\textwidth}{.45\textheight},center}
@@ -816,8 +835,130 @@ Liveness Ranges of all the clocks in a timed automaton helps us determine if a p
 		\item Clock $t_j$ is born on all outgoing transition of state $s$.
 		\item $r_1$, $r_3$ meet at state $q$ and $r_2$, $r_4$ meet at state $n$.
 	\end{itemize}
+	%\pause
 	States $q$ and $n$ are the \emph{problematic} states. So, $r_1,r_3$ should be assigned the same clock and $r_2,r_4$ should be assigned the same clock.
 \end{frame}
+
+\begin{frame}{Handling the Problematic States}
+	To handle the problematic states, we partition the transitions into mothers and others.
+		\begin{itemize}
+			\item $mothers$: $\{r \in \Var{out(s)}~ |~ j \in \Var{born(r)}\}$
+			\item $others$: $\{r \in \Var{out(s)}~ |~ \Var{born(r)} = \emptyset\}$
+		\end{itemize}
+	%\pause
+	We use the following functions:
+		\begin{itemize}
+			\item
+			$\Var{reachable}: Q\rightarrow 2^{Q}$ maps state $q$ to the set of states that are reachable from $q$ by some non-empty path.
+			\item
+			$\Var{reachable\_from}: Q\rightarrow 2^{Q}$ maps state $q$ to the set of states from which it can be reached by some non-empty path.
+		\end{itemize}
+\end{frame}
+
+\begin{frame}{Handling the Problematic States (Contd..)}
+
+	\Var{PP} := $\emptyset$; $~~~~~~\slash\slash$ potentially problematic states
+	
+	\ForEach{$r\in \Var{mothers}$}
+	{
+		\ForEach{$s\in \Var{reachable(target(r))}$}
+		{
+			\If{$L(q)\in \Var{active(r')}$, where $r'$ is an arbitrary transition of $\Var{in(s)}$}
+			{
+				\Var{PP} := $\Var{PP}\cup \{s\}$\;
+			}
+		}
+	}
+
+	%\pause
+	Those states in \Var{PP} that can be reached from more than one mother are the problematic states.
+
+\end{frame}
+
+%\begin{frame}{Clock Allocation Algorithm Overview}
+%	
+%	
+%\end{frame}
+
+\begin{frame}{Example: Optimal Clock Allocation}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{figure}
+				\begin{adjustbox}{max totalsize={.90\textwidth}{.75\textheight},center}
+					\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.5cm,
+					semithick]
+					\tikzstyle{every state}=[draw,minimum size=1em]
+					
+					\node[state]         (S_0)                    {$S_0$};
+					\node[state]         (S_1) [below of=S_0]     {$S_1$};
+					\node[state]         (S_2) [below of=S_1]     {$S_2$};
+					\node[state]         (S_3) [below of=S_2]     {$S_3$};
+					\node[state]         (S_4) [below of=S_3]     {$S_4$};
+					\node[state]         (S_5) [below of=S_4]     {$S_5$};
+					\node[state]         (S_6) [below of=S_5]     {$S_6$};
+					
+					
+					
+					\path (S_0) edge              node[right]  {r0, [$t_0:=0$]}  (S_1)
+					(S_1) edge              node[right]  {r1, [$t_0<2$]}   (S_2)
+					(S_2) edge              node[right]  {r2, [$t_2:=0$]}  (S_3)
+					(S_3) edge              node[right] {r3, [$t_2<2$]}   (S_4)
+					(S_4) edge              node[right] {r4, [$t_4:=0$]}  (S_5)
+					(S_5) edge              node[right] {r5, [$t_4<2$]}   (S_6)
+					
+					;
+					\end{tikzpicture}
+				\end{adjustbox}
+			\caption{A simple timed automaton}
+%			\label{fig:Simple Timed Automaton}				
+			\end{figure}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{figure}
+				\begin{adjustbox}{max totalsize={.99\textwidth}{.75\textheight},center}
+					\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.5cm,
+					semithick]
+					\tikzstyle{every state}=[draw,minimum size=1em]
+					
+					\node[state]         (S_0)                    {$S_0$};
+					\node[state]         (S_1) [below of=S_0]     {$S_1$};
+					\node[state]         (S_2) [below of=S_1]     {$S_2$};
+					\node[state]         (S_3) [below of=S_2]     {$S_3$};
+					\node[state]         (S_4) [below of=S_3]     {$S_4$};
+					\node[state]         (S_5) [below of=S_4]     {$S_5$};
+					\node[state]         (S_6) [below of=S_5]     {$S_6$};
+					
+					
+					
+					\path (S_0) edge              node[right]  {r0, [$c_0:=0$]}  (S_1)
+					(S_1) edge              node[right]  {r1, [$c_0<2$]}   (S_2)
+					(S_2) edge              node[right]  {r2, [$c_0:=0$]}  (S_3)
+					(S_3) edge              node[right] {r3, [$c_0<2$]}   (S_4)
+					(S_4) edge              node[right] {r4, [$c_0:=0$]}  (S_5)
+					(S_5) edge              node[right] {r5, [$c_0<2$]}   (S_6)
+					
+					;
+					\end{tikzpicture}
+				\end{adjustbox}
+			\caption{A simple optimally allocated timed automaton}
+%			\label{fig:Simple Optimal Timed Automaton}
+			\end{figure}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\section{Case Studies}
+
+\begin{frame}{Automated Teller Machine (ATM)}
+	We use an invariant of an ATM:
+	\begin{enumerate}
+		\item Initially, the ATM waits for a user to insert his card,
+		\item User has to enter his PIN within 5 to 60 seconds. User has to enter correct PIN in 3 attempts,
+		\item ATM requests the bank to verify the user's PIN, and
+		\item If the PIN is correct, ATM displays menu to the user within 5 seconds.
+	\end{enumerate}
+\end{frame}
+
 
 \begin{frame}{Mode Graph}
 	\begin{figure}
@@ -873,12 +1014,6 @@ Liveness Ranges of all the clocks in a timed automaton helps us determine if a p
 			\caption{Mode graph of the ATM}
 			\label{fig:Mode graph of the ATM}
 	\end{figure}
-\end{frame}
-
-\section{Case Studies}
-
-\begin{frame}{Automated Teller Machine (ATM)}
-Explain original scenario
 \end{frame}
 
 \begin{frame}{Automated Teller Machine (ATM)}
@@ -974,7 +1109,25 @@ Explain original scenario
 \end{frame}
 
 \begin{frame}{Automated Teller Machine (ATM)}
-Explain extended scenario
+	Now consider an extended behaviour of the ATM machine. After the menu is displayed, assume that, the user can choose from the two available options:
+	\vspace{0.5cm}
+	\begin{columns}[T]
+		\begin{column}{0.4\textwidth}
+			\textbf{Deposit:}
+			\begin{enumerate}
+				\item User enters the amount to deposit, and
+				\item ATM returns success message if the deposit is successful.
+			\end{enumerate}
+		\end{column}
+		\begin{column}{0.51\textwidth}
+			\textbf{Withdraw:}
+			\begin{enumerate}
+				\item User enters the amount to withdraw,
+				\item Bank verifies the user details, and
+				\item Returns success message if the withdraw is successful.
+			\end{enumerate}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 \begin{frame}{Automated Teller Machine (ATM)}
@@ -1119,8 +1272,15 @@ Explain extended scenario
 
 
 \begin{frame}{Light Control System}
+	Consider the variant of the light control system \cite{TimedAutomata:Patricia}:
+	\begin{enumerate}
+		\item $Idle$ is both the initial and final mode ,
+		\item The mode changes from $Idle$ to $Light$ upon issuing the command $ON$, and
+		\item If $ON$ is issued again within 3 units of time, the light will go $Bright$. Else the light goes back to $Idle$. 
+	\end{enumerate}
+	
 	\begin{figure}[!ht]
-		\begin{center}
+		\begin{adjustbox}{max totalsize={.80\textwidth}{.80\textheight},center}
 %			\begin{minipage}{0.8\textwidth}
 				\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=5cm,
 				semithick]
@@ -1137,10 +1297,9 @@ Explain extended scenario
 				;
 				\end{tikzpicture}
 %			\end{minipage}
-		\end{center}
+		\end{adjustbox}
 		\caption{Mode graph of the Light Control System}
 		\label{fig:MG_Light Control System}
-		\vspace{0.1cm}
 	\end{figure}
 \end{frame}
 
@@ -1239,6 +1398,12 @@ Explain extended scenario
 \end{frame}
 
 \begin{frame}{Traffic Light}
+Consider the behaviour of a traffic light \cite{Dubey2007}. 
+	\begin{itemize}
+		\item {The system periodically moves from $Initial \rightarrow Red$, $Red \rightarrow Yellow$, $yellow \rightarrow Green$, and then it is $Reset$},
+		\item {On the transitions $turn-yellow$ and $turn-green$ a clock constraint is checked and a new clock is born.}
+	\end{itemize}
+	\vspace{0.2cm}
 	\begin{figure}
 		\begin{adjustbox}{max totalsize={.99\textwidth}{.8\textheight},center}
 		
@@ -1300,8 +1465,9 @@ Explain extended scenario
 \end{frame}
 
 \begin{frame}{CSMA/CD Protocol}
+	Consider a variant of the CSMA/CD protocol \cite{CSMA/CD}.
 	\begin{figure}
-		\begin{adjustbox}{max totalsize={.99\textwidth}{.8\textheight},center}	
+		\begin{adjustbox}{max totalsize={.99\textwidth}{.75\textheight},center}	
 			\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=8cm,
 			semithick]
 			\tikzstyle{every state}=[draw,minimum size=2cm]
@@ -1372,14 +1538,23 @@ Explain extended scenario
 \section{Conclusion}
 
 \begin{frame}{Conclusion}
-	conclude here
-	\cite{FromScenariosToTimedAutomata-2016}
-	\cite{OptimalClockAllocationTA}
+	\begin{itemize}
+		\item Proposed Timed Event Sequences to formally represent scenarios,
+		%\pause
+		\item Developed and implemented an algorithm to construct timed automaton  from a given set of scenarios expressed as TES and a mode graph,
+		%\pause
+		\item The synthesized timed automaton is minimal, deterministic and acyclic,
+		%\pause
+		\item The generated timed automaton belongs to a class of timed automata that satisfies the dominance assumption,
+		%\pause
+		\item Developed and implemented an optimal clock allocation algorithm to a class of timed automata that satisfies the dominance assumption, and
+		%\pause
+		\item Our algorithm, does not change the size of the original timed automaton and it's complexity is quadratic in the size of the graph.
+	\end{itemize}
 \end{frame}
 
 \begin{frame}[standout]
-THANK PROFESSORS???
-Neda and Committee mem??
+THANK YOU!
 \end{frame}
 \begin{frame}[standout]
 	Questions?
