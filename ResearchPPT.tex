@@ -80,7 +80,7 @@
 \usepackage{xspace}
 \newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
 
-\title{From Scenarios To Optimally Allocated Timed Automata}
+\title{From Scenarios to Optimally Allocated Timed Automata}
 %\subtitle{A modern beamer theme}
 \date{\today}
 \author{Sandeep Vuppula}
@@ -109,9 +109,9 @@
 \begin{frame}{Introduction}
 	\begin{itemize}
 		\item Model-based design is a very effective method for designing real-time systems.
-		\item Building formal models for systems is challenging because of the lack of good formal requirements specifications.
-		\item In many real-time systems where safety is critical.
 		\item Modeling a system formally can help us to understand the desired and undesired behaviours of the system.
+		\item In many real-time systems safety is critical.
+		\item Building formal models for systems is challenging because of the lack of good formal requirements specifications.s
 	\end{itemize}	
 \end{frame}
 
@@ -131,45 +131,43 @@
 \begin{frame}{Introduction}
 %	Synthesizing timed automaton
 	\begin{itemize}
-		\item We use scenarios to build a formal model. A scenario is a partial description of the behaviour of a system.
-		\item We introduce Timed Event Sequences (TES) to formally represent the scenarios formally.
+		\item We use scenarios to build a formal model. A scenario is a partial description of the behaviour of a system,
+		\item We propose Timed Event Sequences (TES) to formally represent the scenarios, and
 		\item We use mode graphs to specify the legal events that can occur in the system.
 	\end{itemize}
 	%\pause
 	\alert{We synthesize a \emph{minimal}, \emph{acyclic} and \emph{deterministic} timed automaton using TES and mode graph.}
 \end{frame}
 
-\begin{frame}{Introduction}
-	Our timed automaton belongs to a class of timed automata that satisfies the following properties:
-	\begin{itemize} 
-		\item A clock $t_{j}$ can be reset only on the transitions emanating from a state labelled $j$ and,
-		\item A clock in a clock constraint on a transition $r$ from a state $q$ can only refer to a clock that has been reset on a transition leaving a state that dominates $q$. We call this \emph{dominance assumption}.
-	\end{itemize}
-%	\pause
-%	\vspace{0.5cm}
-%	Given a timed automaton that belongs to our class, we use \emph{liveness analysis} of clocks to optimally allocate clocks.
-\end{frame}
+%\begin{frame}{Introduction}
+%	Our timed automaton belongs to a class of timed automata that satisfies the following properties:
+%	\begin{itemize} 
+%		\item A clock $t_{j}$ can be reset only on the transitions emanating from a state labelled $j$ and,
+%		\item A clock in a clock constraint on a transition $r$ from a state $q$ can only refer to a clock that has been reset on a transition leaving a state that dominates $q$. We call this \emph{dominance assumption}.
+%	\end{itemize}
+%\end{frame}
 
 \begin{frame}{Introduction}
 	\begin{itemize}
-		\item Given a timed automaton $\cal A$, the problem of deciding whether there exists another timed automaton $\cal B$ that accepts the same language as that of $\cal A$ but with fewer number of clocks is undecidable.
 		\item The number of clocks in a given timed automaton has a direct impact on verification of the system.
+		\item Given a timed automaton $\cal A$, the problem of deciding whether there exists another timed automaton $\cal B$ that accepts the same language as that of $\cal A$ but with fewer number of clocks is undecidable.
+		
 	\end{itemize}
 	\vspace{0.5cm}
 	
 	%\pause
-	\alert{	Given a timed automaton that belongs to our class, we use \emph{liveness analysis} of clocks to optimally allocate clocks.}
+	\alert{	We formulate some criteria for a class of timed automata. Given a timed automaton that belongs to our class, we propose a method to optimally allocate clocks in that automaton.} %Given a timed automaton that belongs to our class, we use \emph{liveness analysis} of clocks to optimally allocate clocks.}
 \end{frame}
 
 \section{Background}
 
-\begin{frame}{Real-time systems}
-	\begin{itemize}
-		\item A real-time system takes input from its surrounding environment and produces results within a stipulated amount of time.
-		\item In the real world, the behaviour of almost every system changes according to time.
-		\item We can model such real time systems with the help of timed automata.
-	\end{itemize}
-\end{frame}
+%\begin{frame}{Real-time systems}
+%	\begin{itemize}
+%		\item A real-time system takes input from its surrounding environment and produces results within a stipulated amount of time.
+%		\item In the real world, the behaviour of almost every system changes according to time.
+%		\item We can model such real time systems with the help of timed automata.
+%	\end{itemize}
+%\end{frame}
 
 \begin{frame}{Modeling Time}
 	There are three approaches for modeling time \cite{Alur:1994:TTA:180782.180519}.
@@ -627,19 +625,18 @@ The timed automaton constructed as a result of our synthesis method belongs to t
 \end{frame}
 
 \begin{frame}{Optimal Clock Allocation of Timed Automata}
+%	Given a timed automaton $\cal A$ that belongs to the aforementioned class of timed automata, to transform it to an equivalent timed automaton $\cal A'$ with optimal allocation of clocks, we need to perform the following steps in order:
+	To optimally allocate clocks in a timed automaton $\cal A$ that belongs to our class of timed automata, we need to perform the following steps in order:
+	\begin{enumerate}
+		\item{Calculate the liveness ranges of clocks in the timed automaton $\cal A$,}
+		\item{Replace the original clocks in $\cal A$ with a set of new clocks,} %such that $|P|\le|V|$,}
+		%\item{Replace the original clocks in $A ~(V=\left\{t_0,t_1,...,t_n \right\}$) with a set of new clocks $P=\left \{c_0,c_1,..,c_m \right\}$ such that $|P|\le|V|$}
+		\item{Rewrite the clock constraints and clock resets in $\cal A$ in terms of new clock variables.}
+	\end{enumerate}
+	%\pause
+	As the problem of deciding if there exists another timed automaton accepting the same language as $\cal A$ is \emph{undecidable} in general, we do not take into account the satisfiability of clock constraints.
+%The complexity of our optimal clock allocation algorithm is quadratic in the size of the original graph.
 
-Given a timed automaton $\cal A$ that belongs to the aforementioned class of timed automata, to transform it to an equivalent timed automaton $\cal A'$ with optimal allocation of clocks, we need to perform the following steps in order:
-\begin{enumerate}
-	\item{Calculate the liveness ranges of clocks in the timed automaton $\cal A$,}
-	\item{Replace the original clocks in $\cal A$ with a set of new clocks,} %such that $|P|\le|V|$,}
-	%\item{Replace the original clocks in $A ~(V=\left\{t_0,t_1,...,t_n \right\}$) with a set of new clocks $P=\left \{c_0,c_1,..,c_m \right\}$ such that $|P|\le|V|$}
-	\item{Rewrite the clock constraints and clock resets in $\cal A$ in terms of new clock variables.}
-\end{enumerate}
-The complexity of our optimal clock allocation algorithm is quadratic in the size of the original graph.
-%\begin{itemize}
-%	\item Liveness analysis
-%	\item Clock allocation
-%\end{itemize}
 \end{frame}
 
 \begin{frame}{Liveness Range Analysis}
@@ -1566,8 +1563,16 @@ Consider the behaviour of a traffic light \cite{Dubey2007}.
 \end{frame}
 
 \begin{frame}[standout]
-THANK YOU!
+\Huge THANK YOU! \\
+\vspace{0.5cm}
+\small
+
+\emph{Dr. Neda Saeedloei}\\
+\emph{Dr. Henry Wang}\\
+\emph{Dr. Ping Zhao}\\
+\emph{all the faculty members and students.}
 \end{frame}
+
 \begin{frame}[standout]
 	Questions?
 \end{frame}
