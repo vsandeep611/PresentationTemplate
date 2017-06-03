@@ -220,7 +220,7 @@ Desired behavior: if Press occurs twice {\textcolor{red} {quickly}} then the lig
 	
 \end{center}
 \end{figure}
-Solution: finite state machines augmented with real-valued clocks.%$c$ is a real-valued clock
+Solution: augment with real-valued clocks.%$c$ is a real-valued clock
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -771,9 +771,9 @@ A new state $s$ is created and labelled with a mode $m_j$ if there is an event $
 				semithick]
 				\tikzstyle{every state}=[draw,minimum size=2em]
 				
-				\node[state, label={[label]30:$m_i$}]      	(S_0)                   {$s$};
-				\node[state, label={[label]30:$m_j$}]        (S_1) 	 [below of=S_0] {$q$};
-				\node        		(q_dots) [below of=S_1,label = below: Timed Automaton] {$\vdots$}; 
+				\node[state, label={[label]30:$m_i$}]      	(S_0)                   {$q$};
+				\node[state, label={[label]30:$m_j$}]        (S_1) 	 [below of=S_0] {$s$};
+				\node        		(q_dots) [below of=S_1,label = below: Timed Annotated Graph] {$\vdots$}; 
 				\node        		(s_dots) [above of=S_0] {$\vdots$}; 
 				
 				\path	(S_0) 		edge node[right]  {e}  (S_1)
@@ -912,12 +912,12 @@ The graph constructed by our algorithm has the following properties:
 					
 					
 					\path (S_0) edge              node[left] {insert-card}                (S_1)
-					(S_1) edge              node[left] {enter-pin [$W − t_0 \ge 5, W − t_0 \le 60$]}  (S_2)
+					(S_1) edge              node[left] {enter-pin [$W - t_0 \ge 5, W - t_0 \le 60$]}  (S_2)
 					(S_2) edge        node[left] {incorrect-pin}              (S_3)
-					(S_3) edge              node[left] {enter-pin [$W − t_0 \ge 5, W − t_0 \le 60$]}  (S_4)
+					(S_3) edge              node[left] {enter-pin [$W - t_0 \ge 5, W - t_0 \le 60$]}  (S_4)
 					(S_4) edge              node[left] {correct-pin} (S_5)
 					(S_5) edge        node[left] {request-data-from-bank} (S_6)
-					(S_6) edge        node[left] {display-menu [$W − t_4 \le 5$]} (S_7)
+					(S_6) edge        node[left] {display-menu [$W - t_4 \le 5$]} (S_7)
 					(S_2) edge [bend left]  node[right] {correct-pin} (S_5)
 					;
 					\end{tikzpicture}
@@ -1003,7 +1003,7 @@ Identifying the liveness ranges of all the clocks in a timed automaton helps us 
 \end{frame}
 
 \begin{frame}{Liveness Analysis of Clocks}
-	The following are a set of functions used to calculate the liveness ranges:
+	We also define the following set of functions:% used to calculate the liveness ranges:
 	\begin{itemize}
 		\item
 		$\mathit{\textbf{clock\_ref}}$: $\mathit{clock\_ref(r)}$ is the set of clocks which are referred to in the clock constraints on $r$.

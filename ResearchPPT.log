@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.4.18)  1 JUN 2017 17:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.4.18)  2 JUN 2017 20:00
 entering extended mode
 **./ResearchPPT.tex
 (ResearchPPT.tex
@@ -1450,22 +1450,6 @@ Overfull \vbox (16.52734pt too high) detected at line 893
 [33
 
 ]
-Missing character: There is no â in font cmss12!
-Missing character: There is no ˆ in font cmss12!
-Missing character: There is no ’ in font cmss12!
-Missing character: There is no â in font cmss12!
-Missing character: There is no ˆ in font cmss12!
-Missing character: There is no ’ in font cmss12!
-Missing character: There is no â in font cmss12!
-Missing character: There is no ˆ in font cmss12!
-Missing character: There is no ’ in font cmss12!
-Missing character: There is no â in font cmss12!
-Missing character: There is no ˆ in font cmss12!
-Missing character: There is no ’ in font cmss12!
-Missing character: There is no â in font cmss12!
-Missing character: There is no ˆ in font cmss12!
-Missing character: There is no ’ in font cmss12!
-
 Overfull \vbox (19.88435pt too high) detected at line 966
  []
 
@@ -1685,7 +1669,7 @@ ram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program File
 s/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX 
 2.9/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Program Files/MiKTeX 2.9/fonts
 /type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on ResearchPPT.pdf (72 pages, 364296 bytes).
+Output written on ResearchPPT.pdf (72 pages, 364267 bytes).
 PDF statistics:
  569 PDF objects out of 1000 (max. 8388607)
  175 named destinations out of 1000 (max. 500000)
