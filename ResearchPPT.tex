@@ -143,10 +143,10 @@
 \end{frame}
 
 \begin{frame}{%What is timed automata?\\
-Timed Automata:	A Simple Light Control}
+A Simple Light Control}
 \begin{figure}[!t]
 	\begin{center}
-		%\begin{minipage}[b]{0.3\textwidth}
+
 		\begin{tikzpicture}
 		
 		\tikzset{vertex/.style = {shape=circle,draw,minimum size=3em}}
@@ -173,7 +173,6 @@ Timed Automata:	A Simple Light Control}
 		
 		\end{tikzpicture}
 		%\caption{A timed automaton (in \OurLargerClass)}\label{incorrect}
-		% \end{minipage}
 		
 	\end{center}
 \end{figure}
@@ -185,7 +184,7 @@ Desired behavior: if Press occurs twice {\textcolor{red} {quickly}} then the lig
 \begin{frame}{Timed Automata: A Simple Light Control}
 \begin{figure}[!t]
 \begin{center}
-	%\begin{minipage}[b]{0.3\textwidth}
+
 	\begin{tikzpicture}
 	\tikzset{vertex/.style = {shape=circle,draw,minimum size=3em}}
 	\tikzset{vertex2/.style = {shape=circle,draw=none,minimum size=1.5em}}
@@ -215,9 +214,7 @@ Desired behavior: if Press occurs twice {\textcolor{red} {quickly}} then the lig
 	%\node[decorate,draw,inner sep=0.5cm,fill=yellow,circle] (a) at (2,0) {};
 	
 	\end{tikzpicture}
-	%\caption{A timed automaton (in \OurLargerClass)}\label{incorrect}
-	% \end{minipage}
-	
+	%\caption{A timed automaton (in \OurLargerClass)}\label{incorrect}	
 \end{center}
 \end{figure}
 Solution: augment with real-valued clocks.%$c$ is a real-valued clock
@@ -229,7 +226,7 @@ Solution: augment with real-valued clocks.%$c$ is a real-valued clock
 \begin{frame}{Timed Automata}
 	\begin{figure}[!t]
 	\begin{center}
-		%\begin{minipage}[b]{0.3\textwidth}
+
 		\begin{tikzpicture}
 		\tikzset{vertex/.style = {shape=circle,draw,minimum size=3em}}
 		\tikzset{vertex2/.style = {shape=circle,draw=none,minimum size=2em}}
@@ -265,9 +262,7 @@ Solution: augment with real-valued clocks.%$c$ is a real-valued clock
 		%\node[decorate,draw,inner sep=0.5cm,fill=yellow,circle] (a) at (2,0) {};
 		
 		\end{tikzpicture}
-		%\caption{A timed automaton (in \OurLargerClass)}\label{incorrect}
-		% \end{minipage}
-	
+		%\caption{A timed automaton (in \OurLargerClass)}\label{incorrect}	
 	\end{center}
 	\end{figure}
 %Solution: finite state machines augmented with real-valued clocks.%$c$ is a real-valued clock
@@ -312,7 +307,7 @@ Solution: augment with real-valued clocks.%$c$ is a real-valued clock
 \begin{frame}{Timed automata: Language Accepted}
 	\begin{figure}[!t]
 	\begin{center}
-%\begin{minipage}[b]{0.3\textwidth}
+
 		\begin{tikzpicture}
 		\tikzset{vertex/.style = {shape=circle,draw,minimum size=3em}}
 		\tikzset{vertex2/.style = {shape=circle,draw=none,minimum size=1.5em}}
@@ -336,9 +331,7 @@ Solution: augment with real-valued clocks.%$c$ is a real-valued clock
 		\draw[edge] (c) to [bend left = 600 pt] node[above]{\textcolor{red}{$t > 3$}} node[below]{Press} (b);
 		
 		\end{tikzpicture}
-		%\caption{A timed automaton (in \OurLargerClass)}\label{incorrect}
-		% \end{minipage}
-		
+		%\caption{A timed automaton (in \OurLargerClass)}\label{incorrect}		
 	\end{center}
 	\end{figure}
 	The languge accepted by the automaton: \\
@@ -613,7 +606,6 @@ It is a tuple $\mathcal{M} = (M, m_0, m_f, \Sigma, T)$ where,
 	\begin{columns}
 		\begin{column}{0.5\textwidth}
 		\begin{figure}[!h]
-	%	\begin{minipage}[b]{.3\textwidth}
 			\begin{adjustbox}{max totalsize={.99\textwidth}{.65\textheight},center}
 			\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.5cm,
 			semithick]
@@ -674,7 +666,6 @@ It is a tuple $\mathcal{M} = (M, m_0, m_f, \Sigma, T)$ where,
 	\begin{columns}
 		\begin{column}{0.5\textwidth}
 			\begin{figure}[!h]
-				%	\begin{minipage}[b]{.3\textwidth}
 				\begin{adjustbox}{max totalsize={.99\textwidth}{.65\textheight},center}
 					\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.5cm,
 					semithick]
@@ -744,7 +735,7 @@ It is a tuple $\mathcal{M} = (M, m_0, m_f, \Sigma, T)$ where,
 \begin{frame}{Decision on Creation of New States and Transitions}
 A new state $s$ is created and labelled with a mode $m_j$ if there is an event $e$ from state $q$ such that $L(q) = m_i$ and $(m_i,e,m_j) \in T$.
 \begin{columns}[T]
-	\begin{column}{0.5\textwidth}
+	\begin{column}{0.33\textwidth}
 		\begin{figure}[!h]
 			\begin{adjustbox}{max totalsize={.99\textwidth}{.65\textheight},center}
 				\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.5cm,
@@ -764,7 +755,27 @@ A new state $s$ is created and labelled with a mode $m_j$ if there is an event $
 			\end{adjustbox}
 		\end{figure}
 	\end{column}
-	\begin{column}{0.5\textwidth}
+	\begin{column}{0.33\textwidth}
+		\begin{figure}[!h]
+			\begin{adjustbox}{max totalsize={.99\textwidth}{.65\textheight},center}
+				\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.5cm,
+				semithick]
+				\tikzstyle{every state}=[draw,minimum size=2em]
+				
+				\node[state, label={[label]30:$m_i$},label={[label]300:$\underset{e}{\leftarrow}$}]      	(S_0)                   {$q$};
+%				\node[state, label={[label]30:$m_j$}]        (S_1) 	 [below of=S_0] {$s$};
+%				\node        		(q_dots) [below of=S_1,label = below: Timed Annotated Graph] {$\vdots$}; 
+				\node        		(s_dots) [above of=S_0] {$\vdots$}; 
+				
+				\path	%(S_0) 		edge node[right]  {e}  (S_1)
+				%(S_1)		edge node[left]  {}   (S_2)	
+				(s_dots) 	edge node		 {}   (S_0)	
+				;
+				\end{tikzpicture}
+			\end{adjustbox}
+		\end{figure}
+	\end{column}
+	\begin{column}{0.33\textwidth}
 		\begin{figure}[!h]
 			\begin{adjustbox}{max totalsize={.99\textwidth}{.65\textheight},center}
 				\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.5cm,
@@ -838,7 +849,7 @@ The graph constructed by our algorithm has the following properties:
 \begin{frame}{Example of Synthesis Method: TES of ATM}
 	\begin{figure}
 		\begin{adjustbox}{max totalsize={.99\textwidth}{.90\textheight},center}
-		%	\begin{minipage}{.7\textwidth}
+		
 		\begin{tikzpicture}[->,>=stealth']
 		\tikzset{vertex/.style = {shape=rectangle,rounded corners, semithick, draw,align=left}}
 		
@@ -857,9 +868,9 @@ The graph constructed by our algorithm has the following properties:
 		};
 		
 		\end{tikzpicture}
-		%\end{minipage}
+	
 		\hspace{0.5cm}
-		%	\begin{minipage}{.7\textwidth}
+		
 		\begin{tikzpicture}[->,>=stealth']
 		\tikzset{vertex/.style = {shape=rectangle,rounded corners, semithick, draw,align=left}}
 		\node[vertex, label = below: TES of Scenario 2] (QUERY) 
@@ -875,7 +886,7 @@ The graph constructed by our algorithm has the following properties:
 		};
 		
 		\end{tikzpicture}
-		%	\end{minipage}
+	
 		\end{adjustbox}
 %		\caption{Timed Event Sequences of the ATM}
 %		\label{fig:TES of ATM}
@@ -1637,7 +1648,7 @@ clocks.
 \begin{frame}{Timed Event Sequences of the ATM}
 	\begin{figure}
 		\begin{adjustbox}{max totalsize={.99\textwidth}{.85\textheight},center}
-		%	\begin{minipage}{.7\textwidth}
+
 			\begin{tikzpicture}[->,>=stealth']
 			\tikzset{vertex/.style = {shape=rectangle,rounded corners, semithick, draw,align=left}}
 			
@@ -1656,9 +1667,9 @@ clocks.
 			};
 			
 			\end{tikzpicture}
-		%\end{minipage}
+
 		\hspace{0.5cm}
-	%	\begin{minipage}{.7\textwidth}
+
 			\begin{tikzpicture}[->,>=stealth']
 			\tikzset{vertex/.style = {shape=rectangle,rounded corners, semithick, draw,align=left}}
 			\node[vertex, label = below: TES of Scenario 2] (QUERY) 
@@ -1674,7 +1685,7 @@ clocks.
 			};
 			
 			\end{tikzpicture}
-	%	\end{minipage}
+
 		\end{adjustbox}
 %		\caption{Timed Event Sequences of the ATM}
 		\label{fig:Timed Event Sequences of ATM}
@@ -1829,7 +1840,7 @@ clocks.
 			(S_5) edge                node[anchor=north, below,sloped,text width=6cm]      {
 				\centering
 				\begin{itemize}
-				\item[] request-data-from-bank\\$c_4 := 0$ 
+				\item[] request-data-from-bank\\$~~~~~~c_4 := 0$ 
 				\end{itemize}
 			}                       (S_6)
 			(S_6) edge                node[anchor=south, above,text width=3.5cm] 
@@ -1899,7 +1910,7 @@ clocks.
 	
 	\begin{figure}[!ht]
 		\begin{adjustbox}{max totalsize={.80\textwidth}{.80\textheight},center}
-%			\begin{minipage}{0.8\textwidth}
+
 				\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=5cm,
 				semithick]
 				\tikzstyle{every state}=[shape=rectangle,draw,minimum size=1em]
@@ -1914,7 +1925,7 @@ clocks.
 				(Bright) edge   [bend left]   node[below]  {OFF}  (Idle)    
 				;
 				\end{tikzpicture}
-%			\end{minipage}
+
 		\end{adjustbox}
 		\caption{The mode graph of the Light Control System}
 		\label{fig:MG_Light Control System}
@@ -1925,7 +1936,6 @@ clocks.
 		\begin{figure}
 			\begin{adjustbox}{max totalsize={.99\textwidth}{.85\textheight},center}
 	
-%			\begin{minipage}[b]{.25\textwidth}
 				\begin{tikzpicture}[->,>=stealth']
 				\tikzset{vertex/.style = {shape=rectangle,rounded corners, semithick, draw,align=left}}
 				\node[vertex, label = below: Scenario 1] (QUERY) 
@@ -1938,9 +1948,9 @@ clocks.
 					$m^{final}:~Idle$};
 				
 				\end{tikzpicture}
-%			\end{minipage}
+
 			\hspace{0.5cm}
-%			\begin{minipage}[b]{.25\textwidth}
+
 				\begin{tikzpicture}[->,>=stealth']
 				\tikzset{vertex/.style = {shape=rectangle,rounded corners, semithick, draw,align=left}}
 				\node[vertex, label = below: Scenario 2] (QUERY) 
@@ -1954,9 +1964,9 @@ clocks.
 					$m^{final}:~Idle$};
 				
 				\end{tikzpicture}
-%			\end{minipage}
+
 			\hspace{0.5cm}
-%			\begin{minipage}[b]{.25\textwidth}
+
 				\begin{tikzpicture}[->,>=stealth']
 				\tikzset{vertex/.style = {shape=rectangle,rounded corners, semithick, draw,align=left}}
 				\node[vertex, label = below: Scenario 3] (QUERY) 
@@ -1970,8 +1980,7 @@ clocks.
 					$m^{final}:~Idle$};
 				
 				\end{tikzpicture}
-%			\end{minipage}
-		
+
 		\end{adjustbox}
 %		\caption{Timed Event Sequences of the Light Control System}
 %		\label{fig:Timed Event Sequences of Light Control System}
@@ -2177,7 +2186,7 @@ clocks.
 \small
 
 \emph{Dr. Neda Saeedloei}\\
-\emph{Dr. Henry Wang}\\
+\emph{Dr. Haiyang Wang}\\
 \emph{Dr. Ping Zhao}\\
 \emph{all the faculty members and students.}
 \end{frame}
